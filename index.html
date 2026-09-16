@@ -3,22 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Nos renovamos! - Pesca Online</title>
+    <title>Acceso Mayorista - Pesca Online</title>
     <!-- Fuente Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta Pesca Online: Azul marino profundo oceánico y verde lima / WhatsApp vibrante */
-            --bg-deep: #071524;
-            --bg-surface: #0e2238;
-            --cyan-accent: #00bcd4;
-            --cyan-glow: rgba(0, 188, 212, 0.25);
+            /* Paleta oficial de Pesca Online */
+            --azul-primario: #0583F2;
+            --azul-claro: #44A1F2;
+            --azul-petroleo: #1D5A73;
+            --blanco-humo: #F2F2F2;
+            
+            /* WhatsApp y acentos */
             --whatsapp-green: #25D366;
-            --whatsapp-hover: #20ba5a;
             --whatsapp-glow: rgba(37, 211, 102, 0.35);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-glass: rgba(242, 242, 242, 0.12);
         }
 
         * {
@@ -29,11 +28,11 @@
 
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-deep);
+            background-color: var(--azul-petroleo);
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 188, 212, 0.18) 0%, transparent 60%),
-                radial-gradient(circle at 85% 90%, rgba(37, 211, 102, 0.1) 0%, transparent 50%);
-            color: var(--text-main);
+                radial-gradient(circle at 50% 0%, rgba(5, 131, 242, 0.35) 0%, transparent 70%),
+                radial-gradient(circle at 85% 90%, rgba(68, 161, 242, 0.18) 0%, transparent 60%);
+            color: var(--blanco-humo);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -43,22 +42,22 @@
 
         /* Tarjeta principal con efecto Glassmorphism */
         .card {
-            background: rgba(14, 34, 56, 0.7);
+            background: rgba(29, 90, 115, 0.45);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-glass);
             border-radius: 28px;
-            padding: 48px 36px;
-            max-width: 500px;
+            padding: 46px 34px;
+            max-width: 520px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.65),
-                        0 0 40px -10px rgba(0, 188, 212, 0.12);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.55),
+                        0 0 40px -10px rgba(5, 131, 242, 0.25);
             position: relative;
             overflow: hidden;
         }
 
-        /* Glow superior sutil decorativo */
+        /* Línea de brillo superior */
         .card::before {
             content: '';
             position: absolute;
@@ -66,66 +65,89 @@
             left: 15%;
             right: 15%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--cyan-accent), var(--whatsapp-green), transparent);
-            opacity: 0.8;
+            background: linear-gradient(90deg, transparent, var(--azul-primario), var(--azul-claro), transparent);
+            opacity: 0.9;
         }
 
         .logo {
-            max-width: 210px;
+            max-width: 220px;
             height: auto;
-            margin: 0 auto 28px auto;
+            margin: 0 auto 26px auto;
             display: block;
-            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+            filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
         }
 
         h1 {
-            font-size: 1.95rem;
+            font-size: 1.9rem;
             font-weight: 700;
             margin-bottom: 12px;
             line-height: 1.25;
-            letter-spacing: -0.02em;
             color: #ffffff;
+            letter-spacing: -0.02em;
         }
 
         .subtitle {
-            font-size: 1.02rem;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-            line-height: 1.55;
+            font-size: 1rem;
+            color: rgba(242, 242, 242, 0.82);
+            margin-bottom: 28px;
+            line-height: 1.5;
         }
 
-        /* Sección de Contacto y Ventas */
-        .contact-section {
-            background: rgba(4, 15, 27, 0.45);
-            border-radius: 20px;
-            padding: 30px 22px;
+        /* Sección Mayorista Destacada */
+        .wholesale-section {
+            background: rgba(10, 36, 49, 0.58);
+            border-radius: 22px;
+            padding: 28px 20px;
             margin-bottom: 24px;
-            border: 1px solid rgba(0, 188, 212, 0.18);
+            border: 1px solid rgba(68, 161, 242, 0.28);
         }
 
-        .section-tag {
-            color: var(--cyan-accent);
+        .wholesale-badge-top {
+            display: inline-block;
+            background: rgba(5, 131, 242, 0.25);
+            color: var(--azul-claro);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1.8px;
-            font-size: 0.82rem;
-            margin-bottom: 12px;
-            display: block;
+            letter-spacing: 1.5px;
+            font-size: 0.78rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(68, 161, 242, 0.35);
         }
 
-        .contact-desc {
-            font-size: 0.95rem;
-            color: #e2e8f0;
+        .exclusive-text {
+            font-size: 0.96rem;
+            color: var(--blanco-humo);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .exclusive-text strong {
+            color: #ffffff;
+        }
+
+        /* Pasos o explicación de validación */
+        .steps-box {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 14px 16px;
             margin-bottom: 22px;
+            text-align: left;
+            font-size: 0.88rem;
+            color: rgba(242, 242, 242, 0.9);
             line-height: 1.45;
+            border-left: 3px solid var(--azul-claro);
         }
 
-        .contact-desc strong {
-            color: var(--whatsapp-green);
+        .steps-box span {
+            display: block;
+            color: #ffffff;
             font-weight: 600;
+            margin-bottom: 4px;
         }
 
-        /* Botón de WhatsApp con gradiente y efecto hover */
+        /* Botón de WhatsApp */
         .whatsapp-btn {
             display: inline-flex;
             align-items: center;
@@ -135,24 +157,20 @@
             color: #ffffff;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.18rem;
-            padding: 16px 28px;
+            font-size: 1.12rem;
+            padding: 16px 24px;
             border-radius: 50px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             box-shadow: 0 8px 24px var(--whatsapp-glow);
             width: 100%;
-            max-width: 360px;
+            max-width: 380px;
         }
 
         .whatsapp-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 14px 30px rgba(37, 211, 102, 0.5);
             background: linear-gradient(135deg, #2ef777 0%, #20ba5a 100%);
-        }
-
-        .whatsapp-btn:active {
-            transform: translateY(-1px);
         }
 
         .whatsapp-icon {
@@ -162,53 +180,54 @@
             flex-shrink: 0;
         }
 
-        /* Etiqueta / Badge */
+        /* Etiqueta de mínimo de compra */
         .badge {
             display: inline-block;
-            background: rgba(0, 188, 212, 0.1);
-            color: #38bdf8;
+            background: rgba(5, 131, 242, 0.2);
+            color: #ffffff;
             padding: 8px 18px;
             border-radius: 20px;
-            font-size: 0.84rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            border: 1px solid rgba(0, 188, 212, 0.25);
+            border: 1px solid rgba(68, 161, 242, 0.4);
+            letter-spacing: 0.3px;
         }
 
-        /* Sección Minorista / Info */
+        /* Sección Minorista */
         .retail-section {
-            padding-top: 24px;
+            padding-top: 22px;
             border-top: 1px solid var(--border-glass);
         }
 
         .retail-title {
-            color: #f1f5f9;
+            color: #ffffff;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.98rem;
             margin-bottom: 6px;
             display: block;
         }
 
         .retail-text {
-            color: var(--text-muted);
-            font-size: 0.92rem;
+            color: rgba(242, 242, 242, 0.7);
+            font-size: 0.9rem;
             line-height: 1.5;
         }
 
         /* Responsive */
         @media (max-width: 480px) {
             .card {
-                padding: 38px 20px;
+                padding: 36px 18px;
                 border-radius: 22px;
             }
             h1 {
-                font-size: 1.65rem;
+                font-size: 1.6rem;
             }
             .whatsapp-btn {
-                font-size: 1.05rem;
-                padding: 14px 20px;
+                font-size: 1rem;
+                padding: 14px 18px;
             }
-            .contact-section {
-                padding: 24px 16px;
+            .wholesale-section {
+                padding: 22px 14px;
             }
         }
     </style>
@@ -216,35 +235,42 @@
 <body>
 
     <div class="card">
-        <!-- Logo de Pesca Online -->
+        <!-- Logo Pesca Online -->
         <img src="pescaonline_logo.png" alt="Pesca Online Logo" class="logo">
 
-        <h1>Estamos trabajando en una página mejor</h1>
-        <p class="subtitle">Renovamos nuestra plataforma para ofrecerte una experiencia y catálogo digital superior.</p>
+        <h1>Portal Mayorista Pesca Online</h1>
+        <p class="subtitle">Venta exclusiva para comercios y distribuidores del rubro.</p>
         
-        <!-- Bloque de Contacto / Venta y Consultas -->
-        <div class="contact-section">
-            <span class="section-tag">Atención y Pedidos</span>
-            <p class="contact-desc">Comunicate directamente con nuestro equipo de atención por <strong>WhatsApp</strong>.</p>
+        <!-- Bloque Mayorista -->
+        <div class="wholesale-section">
+            <span class="wholesale-badge-top">Exclusivo Comercios</span>
             
-            <!-- Botón WhatsApp redirigiendo a api.whatsapp.com -->
-            <a href="https://wa.me/5491138441824?text=Hola%2C%20me%20comunico%20desde%20la%20p%C3%A1gina%20de%20Pesca%20Online" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
-                <!-- Icono oficial WhatsApp SVG -->
+            <p class="exclusive-text">
+                Actualmente operamos <strong>únicamente bajo modalidad mayorista</strong> con acceso privado a nuestro catálogo y lista de precios.
+            </p>
+
+            <div class="steps-box">
+                <span>¿Cómo obtener acceso a la plataforma?</span>
+                Escribinos por WhatsApp. Validamos los datos de tu comercio y el cumplimiento del mínimo de compra para darte de alta como cliente y habilitarte el acceso mayorista.
+            </div>
+            
+            <!-- Botón WhatsApp con mensaje adaptado -->
+            <a href="https://wa.me/5491138441824?text=Hola%2C%20quisiera%20solicitar%20el%20acceso%20mayorista%20para%20mi%20comercio%20en%20Pesca%20Online.%20Cumplo%20con%20el%20m%C3%ADnimo%20de%20compra." target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
                 <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.12 8.12 0 0 1-1.25-4.29c0-4.52 3.68-8.2 8.2-8.2 2.19 0 4.25.85 5.8 2.4 1.55 1.55 2.41 3.61 2.41 5.8 0 4.52-3.68 8.19-8.2 8.19zm4.5-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/>
                 </svg>
-                +54 9 11 3844-1824
+                Solicitar Acceso por WhatsApp
             </a>
             
             <div>
-                <span class="badge">Ventas y Consultas Online</span>
+                <span class="badge">Mínimo de compra: $1.000.000</span>
             </div>
         </div>
         
-        <!-- Bloque Tienda / Catálogo en preparación -->
+        <!-- Bloque Minorista -->
         <div class="retail-section">
-            <span class="retail-title">Tienda Online</span>
-            <p class="retail-text">Muy pronto vas a poder comprar directamente desde nuestra nueva plataforma web.</p>
+            <span class="retail-title">Venta Minorista</span>
+            <p class="retail-text">Canal minorista actualmente no disponible. Próximamente tienda online.</p>
         </div>
     </div>
 
