@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Nos renovamos! - Pesca Online</title>
+    <!-- Fuente Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Paleta Pesca Online: Azul marino profundo oceánico y verde lima / WhatsApp vibrante */
+            --bg-deep: #071524;
+            --bg-surface: #0e2238;
+            --cyan-accent: #00bcd4;
+            --cyan-glow: rgba(0, 188, 212, 0.25);
+            --whatsapp-green: #25D366;
+            --whatsapp-hover: #20ba5a;
+            --whatsapp-glow: rgba(37, 211, 102, 0.35);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-glass: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(0, 188, 212, 0.18) 0%, transparent 60%),
+                radial-gradient(circle at 85% 90%, rgba(37, 211, 102, 0.1) 0%, transparent 50%);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px 16px;
+        }
+
+        /* Tarjeta principal con efecto Glassmorphism */
+        .card {
+            background: rgba(14, 34, 56, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 48px 36px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.65),
+                        0 0 40px -10px rgba(0, 188, 212, 0.12);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glow superior sutil decorativo */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyan-accent), var(--whatsapp-green), transparent);
+            opacity: 0.8;
+        }
+
+        .logo {
+            max-width: 210px;
+            height: auto;
+            margin: 0 auto 28px auto;
+            display: block;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4));
+        }
+
+        h1 {
+            font-size: 1.95rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        .subtitle {
+            font-size: 1.02rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            line-height: 1.55;
+        }
+
+        /* Sección de Contacto y Ventas */
+        .contact-section {
+            background: rgba(4, 15, 27, 0.45);
+            border-radius: 20px;
+            padding: 30px 22px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(0, 188, 212, 0.18);
+        }
+
+        .section-tag {
+            color: var(--cyan-accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            font-size: 0.82rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .contact-desc {
+            font-size: 0.95rem;
+            color: #e2e8f0;
+            margin-bottom: 22px;
+            line-height: 1.45;
+        }
+
+        .contact-desc strong {
+            color: var(--whatsapp-green);
+            font-weight: 600;
+        }
+
+        /* Botón de WhatsApp con gradiente y efecto hover */
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.18rem;
+            padding: 16px 28px;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 18px;
+            box-shadow: 0 8px 24px var(--whatsapp-glow);
+            width: 100%;
+            max-width: 360px;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(37, 211, 102, 0.5);
+            background: linear-gradient(135deg, #2ef777 0%, #20ba5a 100%);
+        }
+
+        .whatsapp-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .whatsapp-icon {
+            width: 26px;
+            height: 26px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        /* Etiqueta / Badge */
+        .badge {
+            display: inline-block;
+            background: rgba(0, 188, 212, 0.1);
+            color: #38bdf8;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 188, 212, 0.25);
+        }
+
+        /* Sección Minorista / Info */
+        .retail-section {
+            padding-top: 24px;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .retail-title {
+            color: #f1f5f9;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .retail-text {
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .card {
+                padding: 38px 20px;
+                border-radius: 22px;
+            }
+            h1 {
+                font-size: 1.65rem;
+            }
+            .whatsapp-btn {
+                font-size: 1.05rem;
+                padding: 14px 20px;
+            }
+            .contact-section {
+                padding: 24px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Logo de Pesca Online -->
+        <img src="pescaonline_logo.png" alt="Pesca Online Logo" class="logo">
+
+        <h1>Estamos trabajando en una página mejor</h1>
+        <p class="subtitle">Renovamos nuestra plataforma para ofrecerte una experiencia y catálogo digital superior.</p>
+        
+        <!-- Bloque de Contacto / Venta y Consultas -->
+        <div class="contact-section">
+            <span class="section-tag">Atención y Pedidos</span>
+            <p class="contact-desc">Comunicate directamente con nuestro equipo de atención por <strong>WhatsApp</strong>.</p>
+            
+            <!-- Botón WhatsApp redirigiendo a api.whatsapp.com -->
+            <a href="https://wa.me/5491138441824?text=Hola%2C%20me%20comunico%20desde%20la%20p%C3%A1gina%20de%20Pesca%20Online" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                <!-- Icono oficial WhatsApp SVG -->
+                <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.12 8.12 0 0 1-1.25-4.29c0-4.52 3.68-8.2 8.2-8.2 2.19 0 4.25.85 5.8 2.4 1.55 1.55 2.41 3.61 2.41 5.8 0 4.52-3.68 8.19-8.2 8.19zm4.5-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/>
+                </svg>
+                +54 9 11 3844-1824
+            </a>
+            
+            <div>
+                <span class="badge">Ventas y Consultas Online</span>
+            </div>
+        </div>
+        
+        <!-- Bloque Tienda / Catálogo en preparación -->
+        <div class="retail-section">
+            <span class="retail-title">Tienda Online</span>
+            <p class="retail-text">Muy pronto vas a poder comprar directamente desde nuestra nueva plataforma web.</p>
+        </div>
+    </div>
+
+</body>
+</html>
