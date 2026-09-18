@@ -5,18 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso Mayorista - Pesca Online</title>
     <link rel="icon" href="icono pescashop_color.png" type="image/png">
-    <!-- Fuente Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta oficial de Pesca Online */
             --azul-primario: #0583F2;
             --azul-claro: #44A1F2;
             --azul-petroleo: #1D5A73;
             --blanco-humo: #F2F2F2;
-            
-            /* WhatsApp y acentos */
             --whatsapp-green: #25D366;
+            --whatsapp-dark: #075e54;
             --whatsapp-glow: rgba(37, 211, 102, 0.35);
             --border-glass: rgba(242, 242, 242, 0.12);
         }
@@ -41,7 +38,6 @@
             padding: 24px 16px;
         }
 
-        /* Tarjeta principal con efecto Glassmorphism */
         .card {
             background: rgba(29, 90, 115, 0.45);
             backdrop-filter: blur(20px);
@@ -58,7 +54,6 @@
             overflow: hidden;
         }
 
-        /* Línea de brillo superior */
         .card::before {
             content: '';
             position: absolute;
@@ -94,7 +89,6 @@
             line-height: 1.5;
         }
 
-        /* Sección Mayorista Destacada */
         .wholesale-section {
             background: rgba(10, 36, 49, 0.58);
             border-radius: 22px;
@@ -128,7 +122,6 @@
             color: #ffffff;
         }
 
-        /* Pasos o explicación de validación */
         .steps-box {
             background: rgba(255, 255, 255, 0.04);
             border-radius: 14px;
@@ -148,40 +141,6 @@
             margin-bottom: 4px;
         }
 
-        /* Botón de WhatsApp Principal */
-        .whatsapp-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.12rem;
-            padding: 16px 24px;
-            border-radius: 50px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-bottom: 16px;
-            box-shadow: 0 8px 24px var(--whatsapp-glow);
-            width: 100%;
-            max-width: 380px;
-        }
-
-        .whatsapp-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 14px 30px rgba(37, 211, 102, 0.5);
-            background: linear-gradient(135deg, #2ef777 0%, #20ba5a 100%);
-        }
-
-        .whatsapp-icon {
-            width: 26px;
-            height: 26px;
-            fill: currentColor;
-            flex-shrink: 0;
-        }
-
-        /* Etiqueta de mínimo de compra */
         .badge {
             display: inline-block;
             background: rgba(5, 131, 242, 0.2);
@@ -194,7 +153,6 @@
             letter-spacing: 0.3px;
         }
 
-        /* Sección Minorista */
         .retail-section {
             padding-top: 22px;
             border-top: 1px solid var(--border-glass);
@@ -214,118 +172,387 @@
             line-height: 1.5;
         }
 
-        /* Burbuja Flotante de WhatsApp */
-        .whatsapp-float-bubble {
+        /* --- CHATBOT WIDGET STYLES --- */
+        .chatbot-container {
             position: fixed;
             bottom: 24px;
             right: 24px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .chat-toggle-btn {
             width: 60px;
             height: 60px;
+            border-radius: 50%;
             background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
             color: #ffffff;
-            border-radius: 50%;
+            border: none;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 4px 12px var(--whatsapp-glow);
-            text-decoration: none;
-            z-index: 9999;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
-        .whatsapp-float-bubble:hover {
-            transform: scale(1.1) translateY(-2px);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), 0 6px 18px rgba(37, 211, 102, 0.55);
-            color: #ffffff;
+        .chat-toggle-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
         }
 
-        .whatsapp-float-bubble svg {
+        .chat-toggle-btn svg {
             width: 32px;
             height: 32px;
             fill: currentColor;
         }
 
-        /* Responsive */
+        .chat-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #ff3b30;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ffffff;
+        }
+
+        .chat-window {
+            width: 360px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            margin-bottom: 16px;
+            animation: chatSlideIn 0.3s ease forwards;
+            font-family: 'Inter', system-ui, sans-serif;
+            text-align: left;
+        }
+
+        .chat-window.open {
+            display: flex;
+        }
+
+        @keyframes chatSlideIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .chat-header {
+            background: var(--whatsapp-dark);
+            color: #ffffff;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+        }
+
+        .chat-avatar img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .chat-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            line-height: 1.2;
+        }
+
+        .chat-status {
+            font-size: 0.75rem;
+            color: #d1fae5;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #25D366;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .chat-close-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .chat-close-btn:hover {
+            opacity: 1;
+        }
+
+        .chat-body {
+            background: #e5ddd5;
+            padding: 16px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 380px;
+            overflow-y: auto;
+        }
+
+        .chat-bubble-msg {
+            background: #ffffff;
+            color: #111827;
+            padding: 12px 14px;
+            border-radius: 0 14px 14px 14px;
+            font-size: 0.88rem;
+            line-height: 1.4;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        }
+
+        .chat-form {
+            background: #ffffff;
+            padding: 14px;
+            border-radius: 14px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .form-group label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #374151;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s;
+            background: #f9fafb;
+            color: #111827;
+        }
+
+        .form-input:focus {
+            border-color: var(--whatsapp-green);
+            background: #ffffff;
+        }
+
+        .form-input.error {
+            border-color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .chat-submit-btn {
+            background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 11px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+            margin-top: 4px;
+            box-shadow: 0 4px 12px var(--whatsapp-glow);
+        }
+
+        .chat-submit-btn:hover {
+            background: linear-gradient(135deg, #2ef777 0%, #20ba5a 100%);
+            transform: translateY(-1px);
+        }
+
+        .chat-submit-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
         @media (max-width: 480px) {
-            .card {
-                padding: 36px 18px;
-                border-radius: 22px;
-            }
-            h1 {
-                font-size: 1.6rem;
-            }
-            .whatsapp-btn {
-                font-size: 1rem;
-                padding: 14px 18px;
-            }
-            .wholesale-section {
-                padding: 22px 14px;
-            }
-            .whatsapp-float-bubble {
-                bottom: 18px;
-                right: 18px;
-                width: 54px;
-                height: 54px;
-            }
-            .whatsapp-float-bubble svg {
-                width: 28px;
-                height: 28px;
-            }
+            .card { padding: 36px 18px; border-radius: 22px; }
+            h1 { font-size: 1.6rem; }
+            .wholesale-section { padding: 22px 14px; }
+            .chat-window { width: calc(100vw - 32px); }
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <!-- Logo Pesca Online -->
         <img src="pescaonline_logo.png" alt="Pesca Online Logo" class="logo">
-
         <h1>Portal Mayorista Pesca Online</h1>
         <p class="subtitle">Venta exclusiva para comercios y distribuidores del rubro.</p>
         
-        <!-- Bloque Mayorista -->
         <div class="wholesale-section">
             <span class="wholesale-badge-top">Exclusivo Comercios</span>
-            
             <p class="exclusive-text">
                 Actualmente operamos <strong>únicamente bajo modalidad mayorista</strong> con acceso privado a nuestro catálogo y lista de precios.
             </p>
 
             <div class="steps-box">
                 <span>¿Cómo obtener acceso a la plataforma?</span>
-                Escribinos por WhatsApp. Validamos los datos de tu comercio y el cumplimiento del mínimo de compra para darte de alta como cliente y habilitarte el acceso mayorista.
+                Completá tus datos en el chat de ayuda o hacé clic abajo para solicitar tu alta comercial y la habilitación al portal mayorista.
             </div>
-            
-            <!-- Botón WhatsApp principal -->
-            <a href="https://wa.me/5491138441824?text=Hola%2C%20quisiera%20solicitar%20el%20acceso%20mayorista%20para%20mi%20comercio%20en%20Pesca%20Online.%20Cumplo%20con%20el%20m%C3%ADnimo%20de%20compra." target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
-                <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.12 8.12 0 0 1-1.25-4.29c0-4.52 3.68-8.2 8.2-8.2 2.19 0 4.25.85 5.8 2.4 1.55 1.55 2.41 3.61 2.41 5.8 0 4.52-3.68 8.19-8.2 8.19zm4.5-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/>
-                </svg>
-                Solicitar Acceso por WhatsApp
-            </a>
             
             <div>
                 <span class="badge">Mínimo de compra: $1.000.000</span>
             </div>
         </div>
         
-        <!-- Bloque Minorista -->
         <div class="retail-section">
             <span class="retail-title">Venta Minorista</span>
             <p class="retail-text">Canal minorista actualmente no disponible. Próximamente tienda online.</p>
         </div>
     </div>
 
-    <!-- Burbuja Flotante de WhatsApp -->
-    <a href="https://wa.me/5491138441824?text=Hola%2C%20quisiera%20solicitar%20el%20acceso%20mayorista%20para%20mi%20comercio%20en%20Pesca%20Online.%20Cumplo%20con%20el%20m%C3%ADnimo%20de%20compra." 
-       target="_blank" 
-       rel="noopener noreferrer" 
-       class="whatsapp-float-bubble" 
-       aria-label="Contactar por WhatsApp">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.12 8.12 0 0 1-1.25-4.29c0-4.52 3.68-8.2 8.2-8.2 2.19 0 4.25.85 5.8 2.4 1.55 1.55 2.41 3.61 2.41 5.8 0 4.52-3.68 8.19-8.2 8.19zm4.5-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/>
-        </svg>
-    </a>
+    <!-- CHATBOT WIDGET -->
+    <div class="chatbot-container">
+        
+        <!-- Ventana del Chat -->
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-avatar">
+                        <img src="icono pescashop_color.png" alt="Pesca Online">
+                    </div>
+                    <div>
+                        <div class="chat-name">Alta Comercial Mayorista</div>
+                        <div class="chat-status"><span class="status-dot"></span> Asistente Online</div>
+                    </div>
+                </div>
+                <button class="chat-close-btn" id="closeChat">&times;</button>
+            </div>
+            
+            <div class="chat-body">
+                <div class="chat-bubble-msg">
+                    ¡Hola! 👋 Para solicitar tu <strong>cuenta mayorista</strong> en Pesca Online, por favor dejanos tus datos y nos comunicamos por WhatsApp:
+                </div>
+
+                <!-- Formulario dentro del chat -->
+                <form class="chat-form" id="mayoristaForm">
+                    <div class="form-group">
+                        <label for="clienteNombre">Nombre y Apellido *</label>
+                        <input type="text" id="clienteNombre" class="form-input" placeholder="Ej: Juan Pérez" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clienteEmail">Correo Electrónico *</label>
+                        <input type="email" id="clienteEmail" class="form-input" placeholder="ejemplo@correo.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clienteCelular">Celular / Teléfono *</label>
+                        <input type="tel" id="clienteCelular" class="form-input" placeholder="Ej: 11 3456-7890" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="clienteComercio">Nombre del Comercio / Local</label>
+                        <input type="text" id="clienteComercio" class="form-input" placeholder="Opcional">
+                    </div>
+
+                    <button type="submit" class="chat-submit-btn">
+                        <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.12 8.12 0 0 1-1.25-4.29c0-4.52 3.68-8.2 8.2-8.2 2.19 0 4.25.85 5.8 2.4 1.55 1.55 2.41 3.61 2.41 5.8 0 4.52-3.68 8.19-8.2 8.19zm4.5-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/></svg>
+                        Enviar solicitud
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Botón Burbuja Flotante -->
+        <button class="chat-toggle-btn" id="toggleChat" aria-label="Abrir chat de ayuda">
+            <span class="chat-badge" id="chatBadge">1</span>
+            <svg viewBox="0 0 24 24">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.12 8.12 0 0 1-1.25-4.29c0-4.52 3.68-8.2 8.2-8.2 2.19 0 4.25.85 5.8 2.4 1.55 1.55 2.41 3.61 2.41 5.8 0 4.52-3.68 8.19-8.2 8.19zm4.5-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/>
+            </svg>
+        </button>
+
+    </div>
+
+    <script>
+        const toggleChatBtn = document.getElementById('toggleChat');
+        const closeChatBtn = document.getElementById('closeChat');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatBadge = document.getElementById('chatBadge');
+        const mayoristaForm = document.getElementById('mayoristaForm');
+
+        const PHONE_NUMBER = "5491138441824";
+
+        function toggleChat() {
+            const isOpen = chatWindow.classList.toggle('open');
+            if (isOpen && chatBadge) {
+                chatBadge.style.display = 'none';
+            }
+        }
+
+        toggleChatBtn.addEventListener('click', toggleChat);
+        closeChatBtn.addEventListener('click', toggleChat);
+
+        mayoristaForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nombre = document.getElementById('clienteNombre').value.trim();
+            const email = document.getElementById('clienteEmail').value.trim();
+            const celular = document.getElementById('clienteCelular').value.trim();
+            const comercio = document.getElementById('clienteComercio').value.trim() || 'No especificado';
+
+            if (!nombre || !email || !celular) return;
+
+            // Formatear mensaje para WhatsApp
+            const mensaje = `*SOLICITUD DE ALTA COMERCIAL MAYORISTA*\n\n` +
+                            `👤 *Nombre y Apellido:* ${nombre}\n` +
+                            `📧 *Email:* ${email}\n` +
+                            `📱 *Celular:* ${celular}\n` +
+                            `🏪 *Comercio:* ${comercio}\n\n` +
+                            `Hola, solicito el alta y acceso para comprar de manera mayorista en Pesca Online. Cumplo con el mínimo de compra.`;
+
+            const url = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, '_blank');
+        });
+    </script>
 
 </body>
 </html>
