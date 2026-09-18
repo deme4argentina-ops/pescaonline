@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso Mayorista - Pesca Online</title>
-     <link rel="icon" href="icono pescashop_color.png" type="image/png">
+    <link rel="icon" href="icono pescashop_color.png" type="image/png">
     <!-- Fuente Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -148,7 +148,7 @@
             margin-bottom: 4px;
         }
 
-        /* Botón de WhatsApp */
+        /* Botón de WhatsApp Principal */
         .whatsapp-btn {
             display: inline-flex;
             align-items: center;
@@ -214,6 +214,37 @@
             line-height: 1.5;
         }
 
+        /* Burbuja Flotante de WhatsApp */
+        .whatsapp-float-bubble {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25D366 0%, #1da851 100%);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 4px 12px var(--whatsapp-glow);
+            text-decoration: none;
+            z-index: 9999;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .whatsapp-float-bubble:hover {
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), 0 6px 18px rgba(37, 211, 102, 0.55);
+            color: #ffffff;
+        }
+
+        .whatsapp-float-bubble svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+
         /* Responsive */
         @media (max-width: 480px) {
             .card {
@@ -229,6 +260,16 @@
             }
             .wholesale-section {
                 padding: 22px 14px;
+            }
+            .whatsapp-float-bubble {
+                bottom: 18px;
+                right: 18px;
+                width: 54px;
+                height: 54px;
+            }
+            .whatsapp-float-bubble svg {
+                width: 28px;
+                height: 28px;
             }
         }
     </style>
@@ -255,7 +296,7 @@
                 Escribinos por WhatsApp. Validamos los datos de tu comercio y el cumplimiento del mínimo de compra para darte de alta como cliente y habilitarte el acceso mayorista.
             </div>
             
-            <!-- Botón WhatsApp con mensaje adaptado -->
+            <!-- Botón WhatsApp principal -->
             <a href="https://wa.me/5491138441824?text=Hola%2C%20quisiera%20solicitar%20el%20acceso%20mayorista%20para%20mi%20comercio%20en%20Pesca%20Online.%20Cumplo%20con%20el%20m%C3%ADnimo%20de%20compra." target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
                 <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.12 8.12 0 0 1-1.25-4.29c0-4.52 3.68-8.2 8.2-8.2 2.19 0 4.25.85 5.8 2.4 1.55 1.55 2.41 3.61 2.41 5.8 0 4.52-3.68 8.19-8.2 8.19zm4.5-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/>
@@ -275,6 +316,16 @@
         </div>
     </div>
 
+    <!-- Burbuja Flotante de WhatsApp -->
+    <a href="https://wa.me/5491138441824?text=Hola%2C%20quisiera%20solicitar%20el%20acceso%20mayorista%20para%20mi%20comercio%20en%20Pesca%20Online.%20Cumplo%20con%20el%20m%C3%ADnimo%20de%20compra." 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="whatsapp-float-bubble" 
+       aria-label="Contactar por WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.06c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.12 8.12 0 0 1-1.25-4.29c0-4.52 3.68-8.2 8.2-8.2 2.19 0 4.25.85 5.8 2.4 1.55 1.55 2.41 3.61 2.41 5.8 0 4.52-3.68 8.19-8.2 8.19zm4.5-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/>
+        </svg>
+    </a>
+
 </body>
 </html>
-
